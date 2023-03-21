@@ -1,0 +1,10 @@
+pipeline{
+	agent any
+		stages{
+			stage('First build'){
+				steps{
+				sh "echo build is success"
+}
+}
+}
+}
