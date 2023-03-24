@@ -1,12 +1,12 @@
 pipeline {
     agent any
     tools{
-        maven 'maven3.9.0'
+        maven 'maven3.9.1'
     }
     stages {
         stage ('git') {
             steps {
-                 git credentialsId: '1111111111task', url: 'https://github.com/Bhanushreerathod/task.git'
+                 
             }
         }
     
@@ -18,7 +18,7 @@ pipeline {
          }
             stage("deploy-dev"){
        steps{
-         deploy adapters: [tomcat9(credentialsId: 'declerativetomcat', path: '', url: 'http://54.162.242.97/:8080/')], contextPath: null, war: '**/*.war'
+         deploy adapters: [tomcat9(credentialsId: 'hvrmalla', path: '', url: 'http://54.162.242.97/:8080/')], contextPath: null, war: '**/*.war'
        }
              }
         
