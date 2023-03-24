@@ -33,11 +33,11 @@ pipeline {
     post{
         success{
             
-            emailext body: 'email sent out from jenkins', subject: '$DEFAULT_SUBJECT' , to: 'bhanushreerathod319@gmail.com'
+            emailext body: 'email sent out from jenkins', subject: '$DEFAULT_SUBJECT' , to: 'hvrmalla@gmail.com'
         }
         
         failure {
-             emailext body: 'email sent out from jenkins', subject: '$DEFAULT_SUBJECT', to: 'bhanushreerathod319@gmail.com'
+             emailext body: 'email sent out from jenkins', subject: '$DEFAULT_SUBJECT', to: 'hvrmalla@gmail.com'
             
         }
     }
