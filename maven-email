@@ -7,6 +7,6 @@ node('slave node') {
       sh "${mavenHome}/bin/mvn clean package"
   }
   stage('deploy to container') {
-      deploy adapters: [tomcat9(credentialsId: '6560c853-aa46-4334-8644-48824a39bac4', path: '', url: 'http://http://54.162.242.97/:8080/')], contextPath: null, war: '**/Example-0.0.1-SNAPSHOT.war'
+      deploy adapters: [tomcat9(credentialsId: '6560c853-aa46-4334-8644-48824a39bac4', path: '', url: 'http://54.162.242.97/:8080/')], contextPath: null, war: '**/Example-0.0.1-SNAPSHOT.war'
   }
 } 
