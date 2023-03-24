@@ -1,0 +1,12 @@
+node('slave node') {
+    def mavenHome = tool name: "maven3.8.6"
+  stage('clone a code from Repository') {
+      git 'https://github.com/Premvikash/java-maven-sample-war.git'
+  }
+  stage('build a code') {
+      sh "${mavenHome}/bin/mvn clean package"
+  }
+  stage('deploy to container') {
+      deploy adapters: [tomcat9(credentialsId: '6560c853-aa46-4334-8644-48824a39bac4', path: '', url: 'http://18.224.62.129:8080/')], contextPath: null, war: '**/Example-0.0.1-SNAPSHOT.war'
+  }
+} 
