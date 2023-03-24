@@ -1,12 +1,44 @@
-node('slave node') {
-    def mavenHome = tool name: "maven3.8.6"
-  stage('clone a code from Repository') {
-      git 'https://github.com/Premvikash/java-maven-sample-war.git'
-  }
-  stage('build a code') {
-      sh "${mavenHome}/bin/mvn clean package"
-  }
-  stage('deploy to container') {
-      deploy adapters: [tomcat9(credentialsId: '6560c853-aa46-4334-8644-48824a39bac4', path: '', url: 'http://54.162.242.97/:8080/')], contextPath: null, war: '**/Example-0.0.1-SNAPSHOT.war'
-  }
-} 
+pipeline {
+    agent any
+    tools{
+        maven 'maven3.9.0'
+    }
+    stages {
+        stage ('git') {
+            steps {
+                 git credentialsId: '1111111111task', url: 'https://github.com/Bhanushreerathod/task.git'
+            }
+        }
+    
+         stage("Maven Build"){
+       steps{
+            sh "mvn clean package"
+            //sh "mv target/*.war target/myweb.war"
+             }
+         }
+            stage("deploy-dev"){
+       steps{
+         deploy adapters: [tomcat9(credentialsId: 'declerativetomcat', path: '', url: 'http://65.0.114.27:8080/')], contextPath: null, war: '**/*.war'
+       }
+             }
+        
+        stage('Hello') {
+            steps {
+                echo "Hello world"
+            
+                    }
+            }
+          
+    }   
+    post{
+        success{
+            
+            emailext body: 'email sent out from jenkins', subject: '$DEFAULT_SUBJECT' , to: 'bhanushreerathod319@gmail.com'
+        }
+        
+        failure {
+             emailext body: 'email sent out from jenkins', subject: '$DEFAULT_SUBJECT', to: 'bhanushreerathod319@gmail.com'
+            
+        }
+    }
+}
