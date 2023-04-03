@@ -67,3 +67,23 @@ ubuntu@ip-172-31-53-17:~/docker-nginx2/html$ sudo cat index.html
     </div>
   </body>
 </html>
+
+#sonarqube installation
+ubuntu@ip-172-31-81-209:~$ sudo cat dockerfile
+FROM ubuntu:20.04
+MAINTAINER Harsha
+RUN apt update
+RUN apt-get install openjdk-11-jdk -y
+RUN apt-get install zip -y
+RUN apt-get install unzip -y
+RUN apt-get install wget -y
+RUN wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.0.65466.zip
+#RUN apt-get install unzip -y
+RUN unzip sonarqube-*.zip -d /opt
+RUN mv /opt/sonarqube-* /opt/sonarqube
+#RUN rm /etc/systemd/system/sonar.service
+COPY sonar.service /etc/systemd/system/
+
+#RUN systemctl daemon-reload
+EXPOSE 9000
+#CMD ["apache2ctl", "-D", "FOREGROUND"]
