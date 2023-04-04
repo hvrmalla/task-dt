@@ -1,0 +1,40 @@
+
+#For EC2 Instance
+ubuntu@ip-172-31-86-43:~/p-terraform$ sudo cat terraec2.tf
+provider "aws" {
+access_key = "AKIAXRTLMRZ6YWHCY2WO"
+secret_key = "N3BVPa/OjANgxHpauIv4n6+g7XQ0uCrDXg8CcahT"
+region = "us-east-1"
+}
+resource "aws_instance" "t-ec2-sample" {
+ami = "ami-006e00d6ac75d2ebb"
+count=1
+security_groups   = ["${aws_security_group.instance.name}"]
+instance_type="t2.micro"
+key_name="t-ec2-sample"
+tags = {
+    Name = "TerraEC2"
+  }
+}
+resource "aws_security_group" "instance" {
+  name = "terraform-EC2"
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
