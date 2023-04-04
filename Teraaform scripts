@@ -2,8 +2,8 @@
 #For EC2 Instance
 ubuntu@ip-172-31-86-43:~/p-terraform$ sudo cat terraec2.tf
 provider "aws" {
-access_key = "AKIAXRTLMRZ6YWHCY2WO"
-secret_key = "N3BVPa/OjANgxHpauIv4n6+g7XQ0uCrDXg8CcahT"
+access_key = ""
+secret_key = ""
 region = "us-east-1"
 }
 resource "aws_instance" "t-ec2-sample" {
